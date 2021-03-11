@@ -1,5 +1,4 @@
 `timescale 1 ns / 10 ps
-//module cd(input wire [2:0] multiplicador, input wire [2:0] multiplicando, input wire Carga_A, Carga_QM, Desplaza_AQ, Reset_A, Resta, clk, reset, output wire q0, q_menos1, output wire [5:0] result);
 
 module uc(input wire q0, reset, clk, q_menos1, output wire Carga_A, Carga_QM, Desplaza_AQ, Reset_A, Resta, Fin);
 
@@ -40,19 +39,10 @@ module uc(input wire q0, reset, clk, q_menos1, output wire Carga_A, Carga_QM, De
 
   // Función de Salida
   assign Carga_A = (((!q0 & q_menos1)|(q0 & !q_menos1)) & ((state == S1)|(state == S3)|(state == S5)))? 1:0;
-  assign Carga_QM = (state == S0)? 1:0; //a 1 si el estado es S0
+  assign Carga_QM = (state == S0)? 1:0; 
   assign Desplaza_AQ = ((state == S2)|(state == S4)|(state == S6))? 1:0;
   assign Reset_A = (state == S0)? 1:0;
   assign Resta = ((q0 & !q_menos1) & ((state == S1)|(state == S3)|(state == S5)))? 1:0;
-  //assign reset = (state == S0)? 1:0;
   assign Fin = (state == S7)? 1:0;
 
 endmodule
-
-  // Cuando tengamos que hacer la función de la salida, cuando desplazar, assign desplazamiento, cuando estemos en el estado s4
-  // cuando estemos en tal s4 s2 y s6 desplazamiento
-  // Sumar y cargar, las dos cosas. Voy a sumar siempre. Bueno si la señal es 10 restamos, si no sumamos
-  //10 resta
-  //01 suma
-
-// -Wall en compilación

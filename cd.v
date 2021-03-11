@@ -1,8 +1,4 @@
 `timescale 1 ns / 10 ps
-// module registro4 (input wire [3:0] entrada, input wire bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [3:0] salida);
-// module registro3 (input wire [2:0] entrada, input wire bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [2:0] salida);
-// module sum_resta4(output wire[3:0] S, output wire c_out, input wire[3:0] A, input wire[3:0] B, input wire resta);
-// module ffdc #(parameter retardo = 0)(input wire clk, reset, carga, d, output reg q);
 
 module cd(input wire [2:0] multiplicador, input wire [2:0] multiplicando, input wire Carga_A, Carga_QM, Desplaza_AQ, Reset_A, Resta, clk, reset, output wire q0, q_menos1, output wire [5:0] result);
 
