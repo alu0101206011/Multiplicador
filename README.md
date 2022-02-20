@@ -13,10 +13,16 @@ testear la unidad de control en un testbench con un caso simulado.
   $ iverilog -o multiplicador componentes.v cd.v uc.v mul.v multiplicador_tb.v
 ```
 
-- Para simular:
+- Para simulación rápida
 ```terminal
   $ vvp multiplicador
 ```
+
+- Para simular con el GTKWave:
+```terminal
+  $ gtkwave multiplicador_tb.vcd
+```
+
 
 ## Funcionamiento básico de GTKWave
 Una vez abierto es necesario darle a reload para que se "ponga en marcha".
