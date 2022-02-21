@@ -7,6 +7,3 @@ module multiplicador(input wire [3:0] multiplicando, input wire [3:0] multiplica
   uc unidad_control(reset, clk, q1, q0, q_menos1, Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, Fin);
 
 endmodule
-
-//module cd(input wire [3:0] multiplicador, multiplicando, input wire Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, clk, reset, output wire q1, q0, q_menos1, output wire [7:0] result);
-//module uc(input wire reset, clk, q1, q0, q_menos1, output wire Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, Fin);

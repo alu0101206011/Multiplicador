@@ -7,10 +7,10 @@ module cd(input wire [3:0] multiplicador, multiplicando, input wire Carga_A, Car
   wire carga_qmenos1, c_sumout;
   registro6 M({multiplicando[3],multiplicando[3],multiplicando}, 1'b0, Carga_QM, 1'b0, clk, reset, salida_M);
   registro6 M2({multiplicando[3],multiplicando,1'b0}, 1'b0, Carga_QM, 1'b0, clk, reset, salida_M2);
-  registro6 A(salida_sum, salida_A[5], Carga_A, Desplaza_AQ, clk, reset, salida_A);
-  registro4 Q(multiplicador, salida_A[0], Carga_QM, Desplaza_AQ, clk, reset, salida_Q); // Necesitamos pegarle un biestable llamado q-1
+  registro6_2desp A(salida_sum, {salida_A[5],salida_A[5]}, Carga_A, Desplaza_AQ, clk, reset, salida_A);
+  registro4_2desp Q(multiplicador, salida_A[1:0], Carga_QM, Desplaza_AQ, clk, reset, salida_Q); // Necesitamos pegarle un biestable llamado q-1
   sum_resta6 sumador(salida_sum, c_sumout, salida_A, salida_mux, Resta);
-  ffdc bq_menos1(clk, reset, Desplaza_AQ, salida_Q[0], q_menos1);  // Flip flop mas sencillo 
+  ffdc bq_menos1(clk, reset, Desplaza_AQ, salida_Q[1], q_menos1);  // Flip flop mas sencillo 
   mux2_1_M2 muxM2oM(salida_mux, salida_M, salida_M2, MoM2);
 
   assign q1 = salida_Q[1];

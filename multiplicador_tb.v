@@ -29,7 +29,7 @@ initial
 begin
   $dumpfile("multiplicador_tb.vcd");
   $dumpvars;
-  #100000   //Evita ejecución infinita
+  #20000   //Evita ejecución infinita
   $finish;
 end
 
@@ -58,7 +58,7 @@ begin
   else
     $display("\tCORRECTO Obtenido=%b", resultado);
   
-  #50  //tiempo de espera entre una multiplicación y la siguiente
+  #20  //tiempo de espera entre una multiplicación y la siguiente
   if (contador == NUM_TESTS)
     $finish;
   else //Siguiente caso

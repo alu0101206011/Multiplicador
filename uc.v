@@ -12,8 +12,6 @@ module uc(input wire reset, clk, q1, q0, q_menos1, output wire Carga_A, Carga_QM
   parameter S3 = 3'b011;
   parameter S4 = 3'b100;
   parameter S5 = 3'b101;
-  parameter S6 = 3'b110;
-  parameter S7 = 3'b111;
 
   // Registro de estado, cambia en cada flanco ciclo de reloj por el nuevo estado o
   // se inicia en caso de flanco de subida de reset al estado inicial
@@ -33,19 +31,16 @@ module uc(input wire reset, clk, q1, q0, q_menos1, output wire Carga_A, Carga_QM
       S2: nextstate = S3;
       S3: nextstate = S4;
       S4: nextstate = S5;
-      S5: nextstate = S6;
-      S6: nextstate = S7;
-      S7: nextstate = S7;
+      S5: nextstate = S5;
       default: nextstate = S0;
     endcase
 
   // Función de Salida
-  assign Carga_A = (!((q1 & q0 & q_menos1) | (!q1 & !q0 & !q_menos1)) & ((state == S1)|(state == S4)))? 1:0;
+  assign Carga_A = (!((q1 & q0 & q_menos1) | (!q1 & !q0 & !q_menos1)) & ((state == S1)|(state == S3)))? 1:0;
   assign Carga_QM = (state == S0)? 1:0; 
-  assign Desplaza_AQ = ((state == S2)|(state == S3)|(state == S5)|(state == S6))? 1:0;
-  assign Resta = (q1 & ((state == S1)|(state == S4)))? 1:0;
-  assign MoM2 = ((!q1 & q0 & q_menos1) | (q1 & !q0 & !q_menos1) & ((state == S1) | (state == S4)))? 1:0;
-  assign Fin = (state == S7)? 1:0;
+  assign Desplaza_AQ = ((state == S2)|(state == S4))? 1:0;
+  assign Resta = (q1 & ((state == S1)|(state == S3)))? 1:0;
+  assign MoM2 = ((!q1 & q0 & q_menos1) | (q1 & !q0 & !q_menos1) & ((state == S1) | (state == S3)))? 1:0;
+  assign Fin = (state == S5)? 1:0;
 
 endmodule
-

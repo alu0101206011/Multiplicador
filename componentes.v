@@ -15,6 +15,20 @@ module registro6 (input wire [5:0] entrada, input wire bit_en_desp, input wire C
   cdaff ff5(Carga, entrada[5], bit_en_desp, clk, reset, enable, salida[5]); //entra un bit en el desplaz
 endmodule
 
+// M con 2 desp
+module registro6_2desp (input wire [5:0] entrada, input wire [1:0] bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [5:0] salida);
+  wire enable; 
+
+  assign enable = Carga | Desplaza; //Si se carga o desplaza se habilitan en modificación los biestables
+
+  cdaff ff0(Carga, entrada[0], salida[2], clk, reset, enable, salida[0]);
+  cdaff ff1(Carga, entrada[1], salida[3], clk, reset, enable, salida[1]);
+  cdaff ff2(Carga, entrada[2], salida[4], clk, reset, enable, salida[2]);
+  cdaff ff3(Carga, entrada[3], salida[5], clk, reset, enable, salida[3]); 
+  cdaff ff4(Carga, entrada[4], bit_en_desp[0], clk, reset, enable, salida[4]); 
+  cdaff ff5(Carga, entrada[5], bit_en_desp[1], clk, reset, enable, salida[5]); //entra un bit en el desplaz
+endmodule
+
 // Q
 module registro5 (input wire [4:0] entrada, input wire bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [4:0] salida);
   wire enable; 
@@ -27,6 +41,7 @@ module registro5 (input wire [4:0] entrada, input wire bit_en_desp, input wire C
   cdaff ff3(Carga, entrada[3], salida[4], clk, reset, enable, salida[3]); 
   cdaff ff4(Carga, entrada[4], bit_en_desp, clk, reset, enable, salida[4]); //entra un bit en el desplaz
 endmodule
+
 
 // Podría ser A o M
 // La línea de Carga indica que se va a asignar un nuevo valor al registro que viene por "entrada"
@@ -42,6 +57,16 @@ module registro4 (input wire [3:0] entrada, input wire bit_en_desp, input wire C
   cdaff ff3(Carga, entrada[3], bit_en_desp, clk, reset, enable, salida[3]); //entra un bit en el desplaz
 endmodule
 
+module registro4_2desp (input wire [3:0] entrada, input wire [1:0] bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [3:0] salida);
+  wire enable; 
+
+  assign enable = Carga | Desplaza; //Si se carga o desplaza se habilitan en modificación los biestables
+
+  cdaff ff0(Carga, entrada[0], salida[2], clk, reset, enable, salida[0]);
+  cdaff ff1(Carga, entrada[1], salida[3], clk, reset, enable, salida[1]);
+  cdaff ff2(Carga, entrada[2], bit_en_desp[0], clk, reset, enable, salida[2]);
+  cdaff ff3(Carga, entrada[3], bit_en_desp[1], clk, reset, enable, salida[3]); //entra un bit en el desplaz
+endmodule
 
 // Registro de 3 bits, soporta Carga de entrada, reseteo y desplazamiento aritmético o lógico
 // La línea de Carga indica que se va a asignar un nuevo valor al registro que viene por "entrada"
