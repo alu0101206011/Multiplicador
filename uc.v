@@ -36,11 +36,11 @@ module uc(input wire reset, clk, q1, q0, q_menos1, output wire Carga_A, Carga_QM
     endcase
 
   // Función de Salida
-  assign Carga_A = (!((q1 & q0 & q_menos1) | (!q1 & !q0 & !q_menos1)) & ((state == S1)|(state == S3)))? 1:0;
+  assign Carga_A = (!((q1 & q0 & q_menos1) | (!q1 & !q0 & !q_menos1)) & ((state == S1)|(state == S3)))? 1'b1:1'b0;
   assign Carga_QM = (state == S0)? 1:0; 
-  assign Desplaza_AQ = ((state == S2)|(state == S4))? 1:0;
-  assign Resta = (q1 & ((state == S1)|(state == S3)))? 1:0;
-  assign MoM2 = ((!q1 & q0 & q_menos1) | (q1 & !q0 & !q_menos1) & ((state == S1) | (state == S3)))? 1:0;
-  assign Fin = (state == S5)? 1:0;
+  assign Desplaza_AQ = ((state == S2)|(state == S4))? 1'b1:1'b0;
+  assign Resta = (q1 & ((state == S1)|(state == S3)))? 1'b1:1'b0;
+  assign MoM2 = ((!q1 & q0 & q_menos1) | (q1 & !q0 & !q_menos1) & ((state == S1) | (state == S3)))? 1'b1:1'b0;
+  assign Fin = (state == S5)? 1'b1:1'b0;
 
 endmodule

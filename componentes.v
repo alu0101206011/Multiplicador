@@ -10,8 +10,8 @@ module registro6 (input wire [5:0] entrada, input wire bit_en_desp, input wire C
   cdaff ff0(Carga, entrada[0], salida[1], clk, reset, enable, salida[0]);
   cdaff ff1(Carga, entrada[1], salida[2], clk, reset, enable, salida[1]);
   cdaff ff2(Carga, entrada[2], salida[3], clk, reset, enable, salida[2]);
-  cdaff ff3(Carga, entrada[3], salida[4], clk, reset, enable, salida[3]); 
-  cdaff ff4(Carga, entrada[4], salida[5], clk, reset, enable, salida[4]); 
+  cdaff ff3(Carga, entrada[3], salida[4], clk, reset, enable, salida[3]);
+  cdaff ff4(Carga, entrada[4], salida[5], clk, reset, enable, salida[4]);
   cdaff ff5(Carga, entrada[5], bit_en_desp, clk, reset, enable, salida[5]); //entra un bit en el desplaz
 endmodule
 
@@ -24,7 +24,7 @@ module registro6_2desp (input wire [5:0] entrada, input wire [1:0] bit_en_desp, 
   cdaff ff0(Carga, entrada[0], salida[2], clk, reset, enable, salida[0]);
   cdaff ff1(Carga, entrada[1], salida[3], clk, reset, enable, salida[1]);
   cdaff ff2(Carga, entrada[2], salida[4], clk, reset, enable, salida[2]);
-  cdaff ff3(Carga, entrada[3], salida[5], clk, reset, enable, salida[3]); 
+  cdaff ff3(Carga, entrada[3], salida[5], clk, reset, enable, salida[3]);
   cdaff ff4(Carga, entrada[4], bit_en_desp[0], clk, reset, enable, salida[4]); 
   cdaff ff5(Carga, entrada[5], bit_en_desp[1], clk, reset, enable, salida[5]); //entra un bit en el desplaz
 endmodule
@@ -92,7 +92,7 @@ endmodule
 //Mux de dos entradas de 1 bit realizado a partir de puertas 
 module mux2_1_i1(output wire out, input wire a, b, s);
   //Declaración de conexiones internas
-  wire  s_n, sa, sb;     
+  wire  s_n, sa, sb;
   //Instancias de puertas y sus conexiones
   not inv1 (s_n, s);
   and and1 (sa, a, s_n);
@@ -101,12 +101,8 @@ module mux2_1_i1(output wire out, input wire a, b, s);
 endmodule
 
 //Mux de dos entradas para elegir M2 o M
-module mux2_1_M2(output reg[5:0] out, input wire[5:0] a, b, input wire s);
-  always @(s,a,b)
-    if (!s)
-      out = a;
-    else
-      out = b;
+module mux2_1_M2(output wire[5:0] out, input wire[5:0] a, b, input wire s);
+  assign out = s? b:a;
 endmodule
 
 module ffdc #(parameter retardo = 0)(input wire clk, reset, carga, d, output reg q);
