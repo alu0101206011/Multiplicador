@@ -133,7 +133,7 @@ module mux2_1_i1(output wire out, input wire a, b, s);
 endmodule
 
 //Mux de dos entradas para elegir M2 o M
-module mux2_1_M2(output wire[5:0] out, input wire[5:0] a, b, input wire s);
+module mux2_1_M2 #(parameter SIZE = 4) (output wire[SIZE-1:0] out, input wire[SIZE-1:0] a, b, input wire s);
   assign out = s? b:a;
 endmodule
 

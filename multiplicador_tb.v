@@ -1,7 +1,7 @@
 `timescale 1 ns / 10 ps
 module multiplicador_tb;
 //Recordar que el caso de -4 en tres bits en el multiplicando dará error en Booth si no hacemos que los registros A y M tengan un bit más (hay overflow) (depende de la implementación del sumador/restador)
-parameter NUM_BITS = 4;
+parameter NUM_BITS = 2;
 parameter NUM_TESTS = (2**(2*NUM_BITS));
 parameter MAX_RANGE = (2**(NUM_BITS-1))-1;
 parameter MIN_RANGE = - (2**(NUM_BITS-1));
@@ -23,7 +23,7 @@ begin
 end
 
 // Módulo a probar
-multiplicador mult(multiplicando, multiplicador, clk, start, resultado, Fin);
+multiplicador #(NUM_BITS) mult(multiplicando, multiplicador, clk, start, resultado, Fin);
 
 initial
 begin

@@ -11,7 +11,7 @@ module cd #(parameter SIZE = 4) (input wire [SIZE-1:0] multiplicando, multiplica
   registroN_2desp #(SIZE) Q(multiplicador, salida_A[1:0], Carga_QM, Desplaza_AQ, clk, reset, salida_Q); // Necesitamos pegarle un biestable llamado q-1
   sum_restaN #(SIZE+2) sumador(salida_sum, c_sumout, salida_A, salida_mux, Resta);
   ffdc bq_menos1(clk, reset, Desplaza_AQ, salida_Q[1], q_menos1);  // Flip flop mas sencillo 
-  mux2_1_M2 muxM2oM(salida_mux, salida_M, salida_M2, MoM2);
+  mux2_1_M2 #(SIZE+2) muxM2oM(salida_mux, salida_M, salida_M2, MoM2);
 
   assign q1 = salida_Q[1];
   assign q0 = salida_Q[0];
