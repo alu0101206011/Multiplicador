@@ -1,7 +1,7 @@
 `timescale 1 ns / 10 ps
 module multiplicador_tb;
 //Recordar que el caso de -4 en tres bits en el multiplicando dará error en Booth si no hacemos que los registros A y M tengan un bit más (hay overflow) (depende de la implementación del sumador/restador)
-parameter NUM_BITS = 3;
+parameter NUM_BITS = 4;
 parameter NUM_TESTS = (2**(2*NUM_BITS));
 parameter MAX_RANGE = (2**(NUM_BITS-1))-1;
 parameter MIN_RANGE = - (2**(NUM_BITS-1));
@@ -29,7 +29,7 @@ initial
 begin
   $dumpfile("multiplicador_tb.vcd");
   $dumpvars;
-  #10000   //Evita ejecución infinita
+  #100000   //Evita ejecución infinita
   $finish;
 end
 
@@ -58,7 +58,7 @@ begin
   else
     $display("\tCORRECTO Obtenido=%b", resultado);
   
-  #20  //tiempo de espera entre una multiplicación y la siguiente
+  #50  //tiempo de espera entre una multiplicación y la siguiente
   if (contador == NUM_TESTS)
     $finish;
   else //Siguiente caso
