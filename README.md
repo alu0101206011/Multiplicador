@@ -1,9 +1,11 @@
-# Multiplicador por algoritmo de Booth
-Implementar el código Verilog de la unidad de Control del sistema secuencial de más abajo usando
-como guía el guión Actividad Previa. Usar N=4 bits. Pensar de antemano los estados, las transiciones y
-testear la unidad de control en un testbench con un caso simulado.
+# Algoritmo de multiplicación de Booth de N bits con recodificación a N bits.
+Se ha implementado este algoritmo en Verilog donde la unidad de control es un sistema secuencial calculado, 
+donde se puede hacer la multiplicación de cualquier numero de N bits par.
 
 ## Implementación
+Es un módulo grande llamado mult en el que dentro se encuentran 2 módulos:
+- Unidad de control
+- Camino de datos
 
 
 ## Funcionamiento básico de Verilog
