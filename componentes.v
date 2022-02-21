@@ -1,6 +1,38 @@
 `timescale 1 ns / 10 ps
 
 
+module registroN #(parameter SIZE = 4) (input wire [SIZE-1:0] entrada, input wire bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [SIZE-1:0] salida);
+  wire enable; 
+  assign enable = Carga | Desplaza; //Si se carga o desplaza se habilitan en modificación los biestables
+  
+  genvar i;
+  generate
+    for (i = 0; i < SIZE; i = i + 1)
+    begin
+      if (i == SIZE - 1)
+        cdaff ff(Carga, entrada[i], bit_en_desp, clk, reset, enable, salida[i]);
+      else
+        cdaff ff(Carga, entrada[i], salida[i+1], clk, reset, enable, salida[i]);
+    end
+  endgenerate
+endmodule
+
+module registroN_2desp #(parameter SIZE = 4) (input wire [SIZE-1:0] entrada, input wire [1:0] bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [SIZE-1:0] salida);
+  wire enable;
+  assign enable = Carga | Desplaza; //Si se carga o desplaza se habilitan en modificación los biestables
+  
+  genvar i;
+  generate
+    for (i = 0; i < SIZE; i = i + 1)
+    begin
+      if (i < SIZE - 2)
+        cdaff ff(Carga, entrada[i], salida[i+2], clk, reset, enable, salida[i]);
+      else
+        cdaff ff(Carga, entrada[i], bit_en_desp[i - SIZE + 2], clk, reset, enable, salida[i]);
+    end
+  endgenerate
+endmodule
+
 // A y M
 module registro6 (input wire [5:0] entrada, input wire bit_en_desp, input wire Carga, Desplaza, clk, reset, output wire [5:0] salida);
   wire enable; 
@@ -127,5 +159,9 @@ endmodule
 
 // Sumador/Restador de 6 bits
 module sum_resta6(output wire[5:0] S, output wire c_out, input wire[5:0] A, input wire[5:0] B, input wire resta);
+  assign {c_out, S} = (resta == 1) ? A - B + 0 : A + B + 0;
+endmodule
+
+module sum_restaN #(parameter SIZE = 4 ) (output wire[SIZE-1:0] S, output wire c_out, input wire[SIZE-1:0] A, input wire[SIZE-1:0] B, input wire resta);
   assign {c_out, S} = (resta == 1) ? A - B + 0 : A + B + 0;
 endmodule
