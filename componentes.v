@@ -162,6 +162,7 @@ module sum_resta6(output wire[5:0] S, output wire c_out, input wire[5:0] A, inpu
   assign {c_out, S} = (resta == 1) ? A - B + 0 : A + B + 0;
 endmodule
 
-module sum_restaN #(parameter SIZE = 4 ) (output wire[SIZE-1:0] S, output wire c_out, input wire[SIZE-1:0] A, input wire[SIZE-1:0] B, input wire resta);
+// Sumador/Restador de N bits
+module sum_restaN #(parameter SIZE = 4) (output wire[SIZE-1:0] S, output wire c_out, input wire[SIZE-1:0] A, input wire[SIZE-1:0] B, input wire resta);
   assign {c_out, S} = (resta == 1) ? A - B + 0 : A + B + 0;
 endmodule

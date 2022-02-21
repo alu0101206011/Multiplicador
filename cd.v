@@ -1,7 +1,6 @@
 `timescale 1 ns / 10 ps
 
 module cd #(parameter SIZE = 4) (input wire [SIZE-1:0] multiplicando, multiplicador, input wire Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, clk, reset, output wire q1, q0, q_menos1, output wire [SIZE*2-1:0] result);
-
   wire [SIZE+1:0] salida_sum, salida_A, salida_mux, salida_M2, salida_M; // SIZE+1 Para que no haya overflow con M2 y M
   wire [SIZE-1:0] salida_Q;
   wire carga_qmenos1, c_sumout;
@@ -15,14 +14,5 @@ module cd #(parameter SIZE = 4) (input wire [SIZE-1:0] multiplicando, multiplica
 
   assign q1 = salida_Q[1];
   assign q0 = salida_Q[0];
-  assign result = {salida_A[SIZE-1:0],salida_Q}; // Asignamos de uno en uno porque en A sobran 2 bits y en Q sobra 1
-
+  assign result = {salida_A[SIZE-1:0],salida_Q};
 endmodule
-
-// Desplaza_M siempre a 0
-// Carga_M y Carga_Q pueden ser iguales porque siempre cargan a la par, A no lo hace 
-// A y Q desplazan juntos
-// Bit en desplazamiento de q es el bit menos significativo de A
-// El c_sumout debería ser bit_en_desp de A?
-
-// reg wire simplemente es implementación interna, cuando lo instanciemos fuera, no pasa nada si lo ponemos en un wire  1111

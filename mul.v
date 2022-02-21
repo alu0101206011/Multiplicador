@@ -5,5 +5,4 @@ module multiplicador #(parameter SIZE = 4) (input wire [SIZE-1:0] multiplicando,
  
   cd #(SIZE) camino (multiplicando, multiplicador, Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, clk, reset, q1, q0, q_menos1, result);   
   uc #(SIZE) unidad_control(reset, clk, q1, q0, q_menos1, Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, Fin);
-
 endmodule
