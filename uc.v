@@ -1,7 +1,7 @@
 `timescale 1 ns / 10 ps
 
 module uc #(parameter SIZE = 4) (input wire reset, clk, q1, q0, q_menos1, output wire Carga_A, Carga_QM, Desplaza_AQ, MoM2, Resta, Fin);
-  reg [$clog2(SIZE+2):0] state;
+  reg [$clog2(SIZE+2):0] state;  // Se trunca el resultado del logaritmo
 
   always @ (posedge clk, posedge reset)
     if (reset)
